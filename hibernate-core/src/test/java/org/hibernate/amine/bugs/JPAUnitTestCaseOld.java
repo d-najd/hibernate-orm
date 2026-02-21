@@ -4,20 +4,12 @@
  */
 package org.hibernate.amine.bugs;
 
-import java.util.stream.Stream;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceConfiguration;
-import jakarta.persistence.Table;
+import org.hibernate.amine.entity.TestBaseEntity;
 import org.hibernate.amine.entity.TestVersionedEntity;
-import org.hibernate.dialect.H2Dialect;
-import org.hibernate.testing.orm.junit.Jpa;
-import org.hibernate.testing.orm.junit.RequiresDialect;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,40 +19,23 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.LockModeType;
+import java.util.stream.Stream;
 
 /**
  * This template demonstrates how to develop a test case for Hibernate ORM, using the Java Persistence API.
  */
-@Jpa(
-		annotatedClasses = {
-				org.hibernate.amine.entity.TestBaseEntity.class,
-		}
-)
-public class JPAUnitTestCase {
+public class JPAUnitTestCaseOld {
 
 	private EntityManagerFactory entityManagerFactory;
 
 	@BeforeEach
 	public void init() {
-		final PersistenceConfiguration cfg = new PersistenceConfiguration( "emf" );
-		entityManagerFactory = Persistence.createEntityManagerFactory(cfg);
-		/*
-		final PersistenceConfiguration cfg = new PersistenceConfiguration( "emf" );
-		entityManagerFactory = cfg.createEntityManagerFactory();
-		 */
+		entityManagerFactory = Persistence.createEntityManagerFactory("templatePU");
 	}
 
 	@AfterEach
 	public void destroy() {
 		entityManagerFactory.close();
-	}
-
-
-	@Test
-	public void exampleTest() {
 	}
 
 	/**
@@ -97,7 +72,6 @@ public class JPAUnitTestCase {
 	 */
 	@ParameterizedTest
 	@ArgumentsSource(VersionedArgumentsProvider.class)
-	@RequiresDialect(H2Dialect.class)
 	public void testVersioned(final LockModeType lockMode, final boolean clear) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
@@ -154,7 +128,6 @@ public class JPAUnitTestCase {
 	 */
 	@ParameterizedTest
 	@ArgumentsSource(UnversionedArgumentsProvider.class)
-	@RequiresDialect(H2Dialect.class)
 	public void testUnversioned(final LockModeType lockMode, final boolean clear) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
@@ -171,33 +144,6 @@ public class JPAUnitTestCase {
 				.setParameter("name", "test")
 				.setLockMode(lockMode)
 				.getSingleResult();
-
-			Assertions.assertEquals(lockMode, entityManager.getLockMode(result));
-		} finally {
-			entityManager.getTransaction().rollback();
-			entityManager.close();
-		}
-	}
-
-	@ParameterizedTest
-	@ArgumentsSource(UnversionedArgumentsProvider.class)
-	@RequiresDialect(H2Dialect.class)
-	public void testUnversionedMine(final LockModeType lockMode, final boolean clear) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-
-		try {
-			entityManager.persist(new TestBaseEntity("test"));
-			entityManager.flush();
-
-			if (clear) {
-				entityManager.clear();
-			}
-
-			TestBaseEntity result = entityManager.createNamedQuery("TestBaseEntity.findByName", TestBaseEntity.class)
-					.setParameter("name", "test")
-					.setLockMode(lockMode)
-					.getSingleResult();
 
 			Assertions.assertEquals(lockMode, entityManager.getLockMode(result));
 		} finally {
@@ -244,35 +190,4 @@ public class JPAUnitTestCase {
 		}
 	}
 
-
-
-	@Entity
-	@NamedQuery(
-			name = "TestBaseEntity.findByName",
-			query = "select e from TestBaseEntity e where e.name = :name"
-	)
-	@Table(name = "TestBaseEntity")
-	public static class TestBaseEntity {
-
-		@Id
-		@GeneratedValue
-		public Long id;
-
-		public String name;
-
-		public TestBaseEntity() {
-		}
-
-		public TestBaseEntity(final String name) {
-			this.name = name;
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-	}
 }

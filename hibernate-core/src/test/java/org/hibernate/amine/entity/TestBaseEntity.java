@@ -9,13 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
 
+
+
 @Entity
 @NamedQuery(
 	name = "TestBaseEntity.findByName",
 	query = "select e from TestBaseEntity e where e.name = :name"
 )
 public class TestBaseEntity {
-
 	@Id
 	@GeneratedValue
 	public Long id;

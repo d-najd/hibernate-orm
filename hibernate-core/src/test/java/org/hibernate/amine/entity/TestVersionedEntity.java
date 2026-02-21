@@ -10,12 +10,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 import jakarta.persistence.Version;
+import org.hibernate.testing.orm.junit.Jpa;
 
 @Entity
 @NamedQuery(
 	name = "TestVersionedEntity.findByName",
 	query = "select e from TestVersionedEntity e where e.name = :name"
+)
+@Table(name = "TestVersionedEntity")
+@Jpa(
+		annotatedClasses = {
+				TestVersionedEntity.class,
+		}
 )
 public class TestVersionedEntity {
 
