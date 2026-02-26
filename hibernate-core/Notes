@@ -1,0 +1,8 @@
+Calling Session.clear() sets lock mode to PESSIMISTIC_FORCE_INCREMENT from NONE?
+
+Seems like lock is enum flags, possible flag set somewhere?
+
+in SessionImpl.getLockMode(), when retrieving the lock its WRITE when its wrong and READ when it's correct? this seems
+to be something in EntityEntryImpl
+
+in SessionImpl.persistanceContext.clear() fixes the bug

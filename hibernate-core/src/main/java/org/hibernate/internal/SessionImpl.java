@@ -350,6 +350,7 @@ public class SessionImpl
 	}
 
 	private void internalClear() {
+		var te = persistenceContext;
 		persistenceContext.clear();
 		actionQueue.clear();
 		eventListenerGroups.eventListenerGroup_CLEAR
@@ -548,6 +549,7 @@ public class SessionImpl
 					entry.getPersister().getEntityName() );
 		}
 		else {
+			var se = entry.getLockMode();
 			return entry.getLockMode();
 		}
 	}
@@ -2498,6 +2500,8 @@ public class SessionImpl
 					.convert( new IllegalArgumentException( "Given entity is not associated with the persistence context" ) );
 		}
 
+		var currentLockMode = getCurrentLockMode( entity );
+		var result = LockModeTypeHelper.getLockModeType( currentLockMode );
 		return LockModeTypeHelper.getLockModeType( getCurrentLockMode( entity ) );
 
 	}

@@ -320,26 +320,26 @@ include 'hibernate-core'
 include 'hibernate-testing'
 
 include 'hibernate-envers'
-include 'hibernate-spatial'
+// include 'hibernate-spatial'
 
-include 'hibernate-platform'
+// include 'hibernate-platform'
 
-include 'hibernate-community-dialects'
-include 'hibernate-vector'
+// include 'hibernate-community-dialects'
+// include 'hibernate-vector'
 
-include 'hibernate-c3p0'
-include 'hibernate-hikaricp'
-include 'hibernate-agroal'
+// include 'hibernate-c3p0'
+// include 'hibernate-hikaricp'
+// include 'hibernate-agroal'
 
-include 'hibernate-jcache'
+// include 'hibernate-jcache'
 
-include 'hibernate-micrometer'
-include 'hibernate-graalvm'
-include 'hibernate-integrationtest-java-modules'
+// include 'hibernate-micrometer'
+// include 'hibernate-graalvm'
+// include 'hibernate-integrationtest-java-modules'
 
-include 'local-build-asciidoctor-extensions'
-
+// include 'local-build-asciidoctor-extensions'
 include 'documentation'
+
 include 'release'
 
 // Not all JDK implementations support JFR
@@ -347,7 +347,7 @@ if ( "OpenJDK Runtime Environment".equals( System.getProperty( "java.runtime.nam
     include 'hibernate-jfr'
 }
 
-include 'hibernate-scan-jandex'
+// include 'hibernate-scan-jandex'
 
 include 'metamodel-generator'
 project(':metamodel-generator').projectDir = new File(rootProject.projectDir, "tooling/metamodel-generator")

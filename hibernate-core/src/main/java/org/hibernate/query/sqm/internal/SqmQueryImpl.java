@@ -729,8 +729,12 @@ public class SqmQueryImpl<R>
 			// JPA requires an exception to be thrown when this is not a select statement
 			verifySelect();
 		}
+		var lockTest = LockMode.fromJpaLockMode( lockMode );
 		getSession().checkOpen( false );
+		var queryOptions = getQueryOptions();
+		var lockOptions = queryOptions.getLockOptions();
 		getQueryOptions().getLockOptions().setLockMode( LockMode.fromJpaLockMode( lockMode ) );
+		lockTest = LockMode.NONE;
 		return this;
 	}
 
