@@ -344,7 +344,7 @@ include 'hibernate-community-dialects'
 
 // Not all JDK implementations support JFR
 if ( "OpenJDK Runtime Environment".equals( System.getProperty( "java.runtime.name" ) ) ) {
-    include 'hibernate-jfr'
+    // include 'hibernate-jfr'
 }
 
 include 'hibernate-scan-jandex'
@@ -371,6 +371,6 @@ rootProject.children.each { project ->
     assert project.buildFile.exists()
     assert project.buildFile.isFile()
 }
-include 'hibernate-platform'
+// include 'hibernate-platform'
 
 
