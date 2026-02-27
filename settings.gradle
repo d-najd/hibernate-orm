@@ -319,12 +319,12 @@ buildCache {
 include 'hibernate-core'
 include 'hibernate-testing'
 
-include 'hibernate-envers'
+// include 'hibernate-envers'
 // include 'hibernate-spatial'
 
 // include 'hibernate-platform'
 
-// include 'hibernate-community-dialects'
+include 'hibernate-community-dialects'
 // include 'hibernate-vector'
 
 // include 'hibernate-c3p0'
@@ -338,32 +338,32 @@ include 'hibernate-envers'
 // include 'hibernate-integrationtest-java-modules'
 
 // include 'local-build-asciidoctor-extensions'
-include 'documentation'
+// include 'documentation'
 
-include 'release'
+// include 'release'
 
 // Not all JDK implementations support JFR
 if ( "OpenJDK Runtime Environment".equals( System.getProperty( "java.runtime.name" ) ) ) {
     include 'hibernate-jfr'
 }
 
-// include 'hibernate-scan-jandex'
+include 'hibernate-scan-jandex'
 
 include 'metamodel-generator'
 project(':metamodel-generator').projectDir = new File(rootProject.projectDir, "tooling/metamodel-generator")
 project(':metamodel-generator').name = 'hibernate-processor'
 
-include 'hibernate-gradle-plugin'
-project(':hibernate-gradle-plugin').projectDir = new File(rootProject.projectDir, "tooling/hibernate-gradle-plugin")
+// include 'hibernate-gradle-plugin'
+// project(':hibernate-gradle-plugin').projectDir = new File(rootProject.projectDir, "tooling/hibernate-gradle-plugin")
 
-include 'hibernate-maven-plugin'
-project(':hibernate-maven-plugin').projectDir = new File(rootProject.projectDir, "tooling/hibernate-maven-plugin")
+// include 'hibernate-maven-plugin'
+// project(':hibernate-maven-plugin').projectDir = new File(rootProject.projectDir, "tooling/hibernate-maven-plugin")
 
 include 'hibernate-ant'
 project(':hibernate-ant').projectDir = new File(rootProject.projectDir, "tooling/hibernate-ant")
 
-include 'hibernate-assistant'
-project(':hibernate-assistant').projectDir = new File(rootProject.projectDir, "tooling/hibernate-assistant")
+// include 'hibernate-assistant'
+// project(':hibernate-assistant').projectDir = new File(rootProject.projectDir, "tooling/hibernate-assistant")
 
 rootProject.children.each { project ->
     project.buildFileName = "${project.name}.gradle"

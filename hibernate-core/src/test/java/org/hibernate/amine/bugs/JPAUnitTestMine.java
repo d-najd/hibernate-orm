@@ -80,7 +80,8 @@ public class JPAUnitTestMine {
 			var se = session.getCurrentLockMode(result);
 			var sessionLockMode = session.getLockMode(result);
 
-			/*
+/*
+	
 			 * TestBaseEntity result = session.createNamedQuery("TestBaseEntity.findByName",
 			 * TestBaseEntity.class)
 			 * .setParameter("name", "test")
