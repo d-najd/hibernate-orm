@@ -1,0 +1,31 @@
+@startuml
+class MyTest
+class SessionImpl {
+-PersistenceContext persistenceContext
+clear()
+}
+class StatefulPersistanceContext {
+-Hashmap<EntityKey, EntityHolderImpl> entityEntryContext
+-EntityEntryContext entityEntryContext
+clear()
+}
+class EntityEntryContext {
+clear()
+}
+class SqmQueryImpl {
+getSession()
+QueryOptionsImpl getQueryOptions()
+}
+class QueryOptionsImpl {
+getLockOptions()
+}
+class LockOptions {
+-LockMode lockMode
+setLockMode(LockMode)
+}
+SessionImpl *-- StatefulPersistanceContext
+StatefulPersistanceContext *-- EntityEntryContext
+SqmQueryImpl *-- QueryOptionsImpl
+QueryOptionsImpl *-- LockOptions
+SessionImpl *-- SqmQueryImpl
+@enduml

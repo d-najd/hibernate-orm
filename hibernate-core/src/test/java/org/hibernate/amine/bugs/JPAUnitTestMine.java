@@ -81,7 +81,7 @@ public class JPAUnitTestMine {
 			var sessionLockMode = session.getLockMode(result);
 
 /*
-	
+
 			 * TestBaseEntity result = session.createNamedQuery("TestBaseEntity.findByName",
 			 * TestBaseEntity.class)
 			 * .setParameter("name", "test")
@@ -180,9 +180,10 @@ public class JPAUnitTestMine {
 					// Arguments.of(LockModeType.PESSIMISTIC_READ, true),
 					// Arguments.of(LockModeType.PESSIMISTIC_WRITE, true),
 
-					Arguments.of(LockModeType.NONE, false),
-					Arguments.of(LockModeType.PESSIMISTIC_READ, false),
-					Arguments.of(LockModeType.PESSIMISTIC_WRITE, false));
+					Arguments.of(LockModeType.NONE, false)
+					// Arguments.of(LockModeType.PESSIMISTIC_READ, false),
+					// Arguments.of(LockModeType.PESSIMISTIC_WRITE, false)
+			);
 		}
 	}
 }

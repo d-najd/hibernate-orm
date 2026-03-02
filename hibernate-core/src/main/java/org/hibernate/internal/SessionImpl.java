@@ -2503,7 +2503,6 @@ public class SessionImpl
 		var currentLockMode = getCurrentLockMode( entity );
 		var result = LockModeTypeHelper.getLockModeType( currentLockMode );
 		return LockModeTypeHelper.getLockModeType( getCurrentLockMode( entity ) );
-
 	}
 
 	@Override

@@ -1,8 +1,17 @@
 Calling Session.clear() sets lock mode to PESSIMISTIC_FORCE_INCREMENT from NONE?
 
-Seems like lock is enum flags, possible flag set somewhere?
+Seems like lock is enum flags, possible flag set somewhere? -> There seem to be 2 LockMode classes with enum containing
+each of the states, one of them doesn't seem to have 100% mapping to the other
 
 in SessionImpl.getLockMode(), when retrieving the lock its WRITE when its wrong and READ when it's correct? this seems
 to be something in EntityEntryImpl
 
-in SessionImpl.persistanceContext.clear() fixes the bug
+in SessionImpl.persistanceContext.clear() fixes the bug -> SPECIFIC FIELD IS
+StatefulPersistanceContext.entityEntryContext.clear() and StatefulPersistanceContext.entitiesByKey have effect -> SPECIFIC FIELD
+if only entitiesByKey are cleared assertion will be triggered
+|
+\/
+EntityEntryContext.nonEnhancedEntityXref.clear() and EntityEntryContext.clearAllReferencesFromManagedEntities()
+
+
+Important classes
