@@ -257,9 +257,9 @@ class StatefulPersistenceContext implements PersistenceContext {
 		}
 
 		// TODO ONE OF THESE 3
-		// arrayHolders = null;
-		// entitiesByKey = null;
-		// entitiesByUniqueKey = null;
+		arrayHolders = null;
+		entitiesByKey = null;
+		entitiesByUniqueKey = null;
 		entityEntryContext.clear();
 		parentsByChild = null;
 		entitySnapshotsByKey = null;

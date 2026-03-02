@@ -2,7 +2,8 @@
 class MyTest
 class SessionImpl {
 -PersistenceContext persistenceContext
-clear()
+-getEntityEntry()
++clear()
 }
 class StatefulPersistanceContext {
 -Hashmap<EntityKey, EntityHolderImpl> entityEntryContext
@@ -23,9 +24,13 @@ class LockOptions {
 -LockMode lockMode
 setLockMode(LockMode)
 }
+class EntityHolderImpl
+class EntityKey
 SessionImpl *-- StatefulPersistanceContext
 StatefulPersistanceContext *-- EntityEntryContext
 SqmQueryImpl *-- QueryOptionsImpl
 QueryOptionsImpl *-- LockOptions
 SessionImpl *-- SqmQueryImpl
+StatefulPersistanceContext *-- EntityHolderImpl
+StatefulPersistanceContext *-- EntityKey
 @enduml
